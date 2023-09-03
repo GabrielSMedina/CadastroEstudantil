@@ -10,12 +10,14 @@ public class InterfaceEstudante {
         controladorEstudante = new ControladorEstudante();
     }
 
+    // Bloco loop de execução
     public void executar(){
         int opcao;
 
         do {
             opcao = capturarOpcoes();
 
+        // Chamada das funções seguindo a escolha do usuario
             switch (opcao) {
                 case 1 -> adicionarEstudante();
 
@@ -34,6 +36,7 @@ public class InterfaceEstudante {
         } while (opcao != 0);
     }
 
+    // Exibição do texto e captura de opção
     private int capturarOpcoes(){
         System.out.println("""
                 Selecione a opção:\s
@@ -64,6 +67,7 @@ public class InterfaceEstudante {
         System.out.println("Endereço: ");
         endereco = scanner.next();
 
+        // Instanciando um estudante para manda-lo para o controlador
         Estudante estudante = new Estudante(matricula, nome, email, telefone, endereco);
         controladorEstudante.adicionarEstudante(estudante);
     }
@@ -72,6 +76,7 @@ public class InterfaceEstudante {
         System.out.println("Informe a matricula para efetuar a remoção:");
         System.out.println("Matrícula: ");
 
+        // Chamando função de remoção e passando parametro informado pelo usuario
         controladorEstudante.removerEstudante(scanner.nextInt());
     }
 
@@ -79,6 +84,8 @@ public class InterfaceEstudante {
         System.out.println("Informe o nome do estudante desejado: ");
         System.out.println("Nome: ");
         Estudante estudante = controladorEstudante.obterEstudantePorNome(scanner.next());
+
+        // Verificando existencia do estudante
         if (estudante != null){
             formataStringDadosEstudante(estudante);
         }else{
@@ -90,6 +97,8 @@ public class InterfaceEstudante {
         System.out.println("Informe a matrícula do estudante desejado: ");
         System.out.println("Matrícula: ");
         Estudante estudante = controladorEstudante.obterEstudantePorMatricula(scanner.nextInt());
+
+        // Verificando existencia do estudante
         if (estudante != null){
             formataStringDadosEstudante(estudante);
         }else{
@@ -99,6 +108,8 @@ public class InterfaceEstudante {
 
     private void exibirEstudantes(){
         System.out.println("Listando Estudantes...\n-------------------------------------");
+
+        // Listando TODOS os estudantes cadastrados no sistema
         for (Estudante estudante : controladorEstudante.listarTodosEstudantes()){
             formataStringDadosEstudante(estudante);
             System.out.println("-------------------------------------");
@@ -106,6 +117,7 @@ public class InterfaceEstudante {
         System.out.println("\n\n");
     }
 
+    // Funçao destinada a formatação do texto de informações do aluno
     private void formataStringDadosEstudante(Estudante estudante){
         System.out.println("\nNome: " + estudante.getNome() +
                 "\nMatrícula: " + estudante.getMatricula() +
